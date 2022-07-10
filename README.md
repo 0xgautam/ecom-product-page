@@ -33,6 +33,7 @@ Users should be able to:
 - CSS custom properties
 - Flexbox
 - CSS Grid
+- Typescript
 - [React](https://reactjs.org/) - JS library
 - [MUI v5](https://mui.com/) - Component Library
 - [Redux Toolkit](https://redux-toolkit.js.org/) - State Management Library

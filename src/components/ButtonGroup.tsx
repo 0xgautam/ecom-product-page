@@ -12,15 +12,25 @@ const ButtonGroup = () => {
   const dispatch = useDispatch();
 
   return (
-    <Box component={"div"} sx={{ display: "flex", gap: "2rem", mt: "2rem" }}>
+    <Box
+      component={"div"}
+      sx={{
+        display: "flex",
+        gap: "2rem",
+        mt: "2rem",
+        flexDirection: { xs: "column", lg: "row" },
+      }}
+    >
       <Box
         component={"div"}
         sx={{
           display: "flex",
           alignItems: "center",
+          justifyContent: "space-between",
           gap: "1.5rem",
           padding: "1rem 2rem",
           backgroundColor: "hsl(223, 64%, 98%)",
+          maxWidth: { sm: "50%", md: "100%" },
           borderRadius: "0.5rem",
         }}
       >
@@ -60,6 +70,9 @@ const ButtonGroup = () => {
         sx={{
           flex: 2,
           color: "white",
+          maxWidth: { sm: "50%", md: "100%" },
+          mb: { xs: "2rem", md: 0 },
+          padding: { xs: "1rem", lg: "0" },
         }}
         onClick={() => {
           dispatch(

@@ -1,4 +1,8 @@
+import { useTheme } from "@mui/material/styles";
+import { IconButton, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
+
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 type Props = {
   images: { thumbnail: string; main: string }[];
@@ -15,7 +19,10 @@ const ImagesList = ({
   setVisible,
   mode,
 }: Props) => {
-  return (
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
+
+  const DesktopView = (
     <Box
       component={"div"}
       sx={{
@@ -25,7 +32,7 @@ const ImagesList = ({
         gap: "1rem",
         width: "100%",
         height: "100%",
-        margin: "3rem 2rem",
+        margin: { md: "3rem 0rem", lg: "3rem 2rem" },
       }}
     >
       <Box
@@ -87,6 +94,53 @@ const ImagesList = ({
       </Box>
     </Box>
   );
+
+  const MobileView = (
+    <Box sx={{ width: "100%" }}>
+      <IconButton
+        size="large"
+        onClick={() =>
+          selected === 0 ? null : setSelected((selected) => selected - 1)
+        }
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "1rem",
+        }}
+      >
+        <ArrowBackIosNewIcon sx={{ color: "black" }} />
+      </IconButton>
+
+      <IconButton
+        size="large"
+        onClick={() =>
+          selected === images.length - 1
+            ? null
+            : setSelected((selected) => selected + 1)
+        }
+        sx={{
+          position: "absolute",
+          top: "50%",
+          right: "1rem",
+        }}
+      >
+        <ArrowBackIosNewIcon
+          sx={{ color: "black", transform: "rotate(180deg)" }}
+        />
+      </IconButton>
+
+      <Box
+        component={"img"}
+        src={images[selected].main}
+        width={"100%"}
+        height={"30rem"}
+        sx={{ objectFit: "cover" }}
+      />
+    </Box>
+  );
+
+  if (matches) return MobileView;
+  else return DesktopView;
 };
 
 export default ImagesList;

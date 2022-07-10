@@ -3,7 +3,7 @@ import ButtonGroup from "./ButtonGroup";
 
 const ProductDescription = () => {
   return (
-    <Box component={"div"} sx={{ margin: "auto 2rem" }}>
+    <Box component={"div"} sx={{ margin: "3rem 2rem" }}>
       <Typography
         variant="h6"
         sx={{

@@ -10,11 +10,11 @@ function App() {
       <Box
         component={"div"}
         sx={{
-          display: "grid",
+          display: { sm: "block", md: "grid" },
           width: "100%",
           gridTemplateColumns: "1fr 1fr",
           gap: "2rem",
-          padding: "0 5rem",
+          padding: { md: "0 5rem" },
         }}
       >
         <ProductImages />

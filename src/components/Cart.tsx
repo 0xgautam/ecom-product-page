@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   Badge,
   Box,
+  Button,
   Divider,
   IconButton,
   Menu,
@@ -18,18 +19,31 @@ const CartItem = ({ id, price, product, quantity, src }: cartItem) => {
   const dispatch = useDispatch();
 
   return (
-    <Box sx={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+    <Box
+      sx={{
+        display: "flex",
+        gap: { xs: "0.5rem", sm: "1rem" },
+        alignItems: "center",
+        justifyContent: { sm: "space-around" },
+      }}
+    >
       <Box
         component={"img"}
         src={src}
-        height={"5rem"}
-        width={"5rem"}
-        sx={{ borderRadius: "0.5rem" }}
+        sx={{
+          borderRadius: "0.5rem",
+          height: { xs: "3rem", sm: "5rem" },
+          width: { xs: "3rem", sm: "5rem" },
+        }}
       />
 
-      <Box>
-        <Typography>{product}</Typography>
-        <Typography variant={"h6"} component={"h6"}>
+      <Box sx={{ width: { xs: "45%", sm: "100%" } }}>
+        <Typography noWrap>{product}</Typography>
+        <Typography
+          variant={"h6"}
+          component={"h6"}
+          sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }}
+        >
           {quantity} x {price} = {quantity * price}
         </Typography>
       </Box>
@@ -81,8 +95,8 @@ const Cart = () => {
         PaperProps={{
           elevation: 0,
           sx: {
-            padding: "2rem",
-            minWidth: "15rem",
+            padding: { xs: "1rem", sm: "2rem" },
+            minWidth: { sm: "15rem" },
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
@@ -92,18 +106,6 @@ const Cart = () => {
               ml: -0.5,
               mr: 1,
             },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
           },
         }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
@@ -112,17 +114,25 @@ const Cart = () => {
         <Typography gutterBottom>Cart</Typography>
         <Divider sx={{ mb: "2rem" }} />
         {cart.length ? (
-          cart.map((item) => (
-            <MenuItem>
-              <CartItem
-                id={item.id}
-                price={item.price}
-                product={item.product}
-                quantity={item.quantity}
-                src={item.src}
-              />
-            </MenuItem>
-          ))
+          <>
+            {cart.map((item) => (
+              <MenuItem>
+                <CartItem
+                  id={item.id}
+                  price={item.price}
+                  product={item.product}
+                  quantity={item.quantity}
+                  src={item.src}
+                />
+              </MenuItem>
+            ))}
+            <Button
+              variant="contained"
+              sx={{ width: "100%", color: "white", mt: "2rem" }}
+            >
+              Checkout
+            </Button>
+          </>
         ) : (
           <Typography>Your Cart Is Empty</Typography>
         )}
